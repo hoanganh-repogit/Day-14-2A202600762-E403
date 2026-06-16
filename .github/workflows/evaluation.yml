@@ -1,0 +1,30 @@
+name: AI Evaluation
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install test dependency
+        run: python -m pip install pytest
+
+      - name: Run unit tests
+        run: python -m pytest tests/ -v
+
+      - name: Run 20 QA benchmark
+        run: python run_benchmark.py
+
+      - name: Run bonus evaluation gates
+        run: python bonus_evaluation.py --ci

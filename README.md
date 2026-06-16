@@ -190,7 +190,7 @@ Triển khai 2 metrics đánh giá chất lượng retriever (chạy trên `list
 
 ## Sản phẩm nộp bài
 
-1. **`solution/solution.py`** — triển khai hoàn chỉnh tất cả TODO
+1. **`solution/solution.py`** — triển khai hoàn chỉnh tất cả phần yêu cầu
 2. **`exercises.md`** — golden dataset 20 QA pairs (5E + 7M + 5H + 3A) + benchmark results + rubric design
 3. **`reflection.md`** — evaluation report: 3 worst failures với 5 Whys + improvement log + regression strategy
 
@@ -201,7 +201,7 @@ Triển khai 2 metrics đánh giá chất lượng retriever (chạy trên `list
 | Thời gian | Hoạt động                                                                                     |
 | --------- | --------------------------------------------------------------------------------------------- |
 | 0:00–0:20 | **Warm-up:** Hiểu RAGAS thresholds + position bias (exercises.md Phần 1)                      |
-| 0:20–1:20 | **Core coding:** Triển khai tất cả TODO trong template.py                                     |
+| 0:20–1:20 | **Core coding:** Triển khai tất cả phần còn thiếu trong template.py                           |
 | 1:20–2:20 | **Extended:** Tạo golden dataset 20 QA, chạy benchmark, thiết kế rubric (exercises.md Phần 3) |
 | 2:20–2:50 | **Reflection:** Failure analysis 5 Whys + regression strategy (reflection.md)                 |
 | 2:50–3:00 | **Wrap-up:** Chạy pytest, copy solution, nộp bài                                              |
@@ -243,8 +243,22 @@ pytest tests/ -v
 
 ## Bonus (thêm điểm)
 
-- Chạy 2 frameworks khác nhau trên cùng dataset và so sánh scores (+10)
-- Tích hợp evaluation vào CI/CD script (GitHub Actions hoặc tương tự) (+5)
-- Thêm custom metric ngoài 3 metrics cơ bản (+5)
+- [x] Chạy 2 frameworks khác nhau trên cùng dataset và so sánh scores (+10)
+- [x] Tích hợp evaluation vào CI/CD script (GitHub Actions hoặc tương tự) (+5)
+- [x] Thêm custom metric ngoài 3 metrics cơ bản (+5)
+
+### Chạy benchmark và bonus local
+
+```bash
+python run_benchmark.py
+python bonus_evaluation.py
+python bonus_evaluation.py --ci
+```
+
+Bonus artifacts:
+- `benchmark_dataset.py` — golden dataset 20 QA dùng chung cho scripts.
+- `run_benchmark.py` — chạy benchmark RAGAS-inspired trên 20 QA.
+- `bonus_evaluation.py` — so sánh RAGAS-inspired với DeepEval-style rubric và custom metric `safety_robustness_score`.
+- `.github/workflows/evaluation.yml` — CI/CD quality gate.
 
 # Day_14_RAG_Evaluation
